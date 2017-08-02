@@ -6,7 +6,7 @@
     <DataSource Name="DataSource1">
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
-        <ConnectString>Data Source=10.6.5.155;Initial Catalog=CallReporting</ConnectString>
+        <ConnectString>Data Source=tipsdb.database.windows.net;Initial Catalog=LOA</ConnectString>
       </ConnectionProperties>
       <rd:SecurityType>DataBase</rd:SecurityType>
       <rd:DataSourceID>dc4d4534-d350-4471-8546-e8da4b6ce3f3</rd:DataSourceID>
@@ -16,12 +16,11 @@
     <DataSet Name="DataSet1">
       <Query>
         <DataSourceName>DataSource1</DataSourceName>
-        <CommandText>use CallReporting
-Select [From User],
+        <CommandText>Select [From User],
        COUNT([Talking Time]) as Outgoing,
        GETDATE()
 from dbo.CALL_RECORDS_MASTER
-Where [Talking Time] &gt;= 30
+Where [Talking Time] &gt;= 25
  AND  DATEDIFF(day,convert(date,convert(datetime,REPLACE([Call Time],'"',''))),GETDATE()) &lt;= 7
 And  DATEDIFF(day,convert(date,convert(datetime,REPLACE([Call Time],'"',''))),GETDATE()) &gt;= 3
  AND [From User] LIKE '%doubleradius.com%'
@@ -364,7 +363,7 @@ order by Outgoing DESC</CommandText>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value EvaluationMode="Constant">=30 </Value>
+                    <Value EvaluationMode="Constant">=25</Value>
                     <Style>
                       <FontWeight>Normal</FontWeight>
                     </Style>
